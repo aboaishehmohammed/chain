@@ -20,6 +20,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'user_type',
+        'status',
         'password',
     ];
 
@@ -41,4 +43,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function scopeEmployee($query) {
+        return $query->where('user_type', 'employee');
+    }
+    public function contactDetails(){
+      return  $this->hasOne(ContactDetail::class);
+    }
 }
